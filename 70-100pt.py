@@ -15,10 +15,44 @@ from Tkinter import *
 root = Tk()
 
 drawpad = Canvas(root, width=800,height=600, background='white')
-player = drawpad.create_oval(390,580,410,600, fill="red")
+player = drawpad.create_oval(390,580,410,600, fill="light green")
 
 # Create your "enemies" here, before the class
+enemy1 = drawpad.create_rectangle(300,250,340,270, fill="light blue")
+enemy1Speed = 5
+enemy2Speed = 8
+enemy3Speed = -3
 
+enemy2 = drawpad.create_rectangle(400,350,440,370, fill="light pink")
+
+enemy3 = drawpad.create_rectangle(740,50,800,70, fill="purple")
+
+def enemy1Animation():
+    global enemy1Speed
+    x1, y1, x2, y2 = drawpad.coords(enemy1)
+    if x2 > drawpad.winfo_width(): 
+        drawpad.move(enemy1,-800,0)
+    drawpad.move(enemy1,enemy1Speed,0)
+    drawpad.after(1,enemy1Animation) 
+enemy1Animation()
+
+def enemy2Animation():
+    global enemy2Speed
+    x1, y1, x2, y2 = drawpad.coords(enemy2)
+    if x2 > drawpad.winfo_width(): 
+        drawpad.move(enemy2,-800,0)
+    drawpad.move(enemy2,enemy2Speed,0)
+    drawpad.after(1,enemy2Animation) 
+enemy2Animation()
+
+def enemy3Animation():
+    global enemy3Speed
+    x1, y1, x2, y2 = drawpad.coords(enemy3)
+    if x2 < 0: 
+        drawpad.move(enemy3,800,0)
+    drawpad.move(enemy3,enemy3Speed,0)
+    drawpad.after(1,enemy3Animation) 
+enemy3Animation()
 
 class MyApp:
 	def __init__(self, parent):
